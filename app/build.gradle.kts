@@ -35,7 +35,7 @@ android {
 }
 
 dependencies {
-
+    // Dependencias básicas
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
@@ -44,14 +44,14 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 
-    // Dependencias CameraX
+    // Dependencias CameraX - versión adaptada a la nueva sintaxis
     val cameraxVersion = "1.3.1"
-    implementation("androidx.camera:camera-core:${cameraxVersion}")
-    implementation("androidx.camera:camera-camera2:${cameraxVersion}")
-    implementation("androidx.camera:camera-lifecycle:${cameraxVersion}")
-    implementation("androidx.camera:camera-video:${cameraxVersion}")
-    implementation("androidx.camera:camera-view:${cameraxVersion}")
-    implementation("androidx.camera:camera-extensions:${cameraxVersion}")
+    implementation("androidx.camera:camera-core:$cameraxVersion")
+    implementation("androidx.camera:camera-camera2:$cameraxVersion")
+    implementation("androidx.camera:camera-lifecycle:$cameraxVersion")
+    implementation("androidx.camera:camera-video:$cameraxVersion")
+    implementation("androidx.camera:camera-view:$cameraxVersion")
+    implementation("androidx.camera:camera-extensions:$cameraxVersion")
 
     // Lifecycle
     implementation("androidx.lifecycle:lifecycle-runtime:2.6.2")
@@ -59,5 +59,6 @@ dependencies {
     // Concurrent
     implementation("androidx.concurrent:concurrent-futures:1.1.0")
 
-
+    // ML Kit para detección de rostros (si lo necesitas)
+    implementation("com.google.mlkit:face-detection:16.1.5")
 }
