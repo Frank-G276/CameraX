@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS";
     private static final int REQUEST_CODE_PERMISSIONS = 10;
 
-    // Permisos actualizados según versión de Android
+    // Permisos según versión de Android
     private String[] getRequiredPermissions() {
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P) {
             return new String[] {
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView cameraStatus;
     private Button videoCaptureButton;
 
-    // Nuevo: ActivityResultLauncher para manejo de permisos moderno
+    //Para manejo de permisos moderno
     private ActivityResultLauncher<String[]> requestPermissionLauncher =
             registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(),
                     permissions -> {
@@ -109,7 +109,6 @@ public class MainActivity extends AppCompatActivity {
         viewBinding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(viewBinding.getRoot());
 
-        // Verificar permisos con el nuevo enfoque
         if (allPermissionsGranted()) {
             startCamera();
         } else {
@@ -129,7 +128,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void requestPermissions() {
-        // Usar el método moderno de solicitud de permisos
         requestPermissionLauncher.launch(getRequiredPermissions());
     }
 
@@ -174,7 +172,6 @@ public class MainActivity extends AppCompatActivity {
                 imageAnalyzer.setAnalyzer(cameraExecutor, new ImageAnalysis.Analyzer() {
                     @Override
                     public void analyze(@NonNull ImageProxy image) {
-                        // Aquí se puede implementar el análisis de imagen
                         image.close();
                     }
                 });
@@ -225,7 +222,6 @@ public class MainActivity extends AppCompatActivity {
         contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, name);
         contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg");
 
-        // Actualizado para compatibilidad con versiones recientes de Android
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P) {
             contentValues.put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/CameraX-Image");
         }
@@ -294,7 +290,6 @@ public class MainActivity extends AppCompatActivity {
         contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, name);
         contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "video/mp4");
 
-        // Actualizado para compatibilidad con versiones recientes de Android
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P) {
             contentValues.put(MediaStore.Video.Media.RELATIVE_PATH, "Movies/CameraX-Video");
         }
@@ -346,8 +341,6 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    // Este método se mantiene para compatibilidad con versiones anteriores
-    // pero ya no es el principal método para manejar permisos
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
